@@ -1,10 +1,12 @@
 import * as assert from 'assert';
 import { createHash } from 'crypto';
-import * as crypto from 'crypto';
 import { beforeEach, describe, it } from 'mocha';
-import { ECPairFactory, networks as NETWORKS } from 'ecpair';
-import type { ECPairInterface, TinySecp256k1Interface } from 'ecpair';
-import fixtures from './fixtures/ecpair.json';
+import { ECPairFactory, networks as NETWORKS } from '@scrypt-inc/ecpair';
+import type {
+  ECPairInterface,
+  TinySecp256k1Interface,
+} from '@scrypt-inc/ecpair';
+import fixtures from './fixtures/ecpair.json' assert { type: 'json' };
 import * as tinysecp from 'tiny-secp256k1';
 import * as tools from 'uint8array-tools';
 
@@ -188,7 +190,6 @@ describe('ECPair', () => {
         // crypto.getRandomValues = (): Buffer => {
         //   return d;
         // };
-
         // const keyPair = ECPair.makeRandom();
         // assert.strictEqual(keyPair.toWIF(), exWIF);
         // crypto.getRandomValues = originalFn;
