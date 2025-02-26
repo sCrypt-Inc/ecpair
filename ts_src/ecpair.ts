@@ -95,6 +95,28 @@ interface XOnlyPointAddTweakResult {
   xOnlyPubkey: Uint8Array;
 }
 
+function randombytes(size: number): Uint8Array {
+  if (size === undefined || typeof size !== 'number') {
+    throw new Error('Invalid size argument');
+  }
+
+  // Browser environment
+  if (typeof window !== 'undefined' && window.crypto?.getRandomValues) {
+    const array = new Uint8Array(size);
+    window.crypto.getRandomValues(array);
+    return array;
+  }
+
+  // Node.js environment
+  if (typeof require === 'function') {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const crypto = require('crypto');
+    return crypto.randomBytes(size);
+  }
+
+  throw new Error('No secure random number generator available');
+}
+
 export function ECPairFactory(ecc: TinySecp256k1Interface): ECPairAPI {
   testEcc(ecc);
   function isPoint(maybePoint: any): boolean {
@@ -169,9 +191,7 @@ export function ECPairFactory(ecc: TinySecp256k1Interface): ECPairAPI {
   function makeRandom(options?: ECPairOptions): ECPairInterface {
     v.parse(ECPairOptionsSchema, options);
     if (options === undefined) options = {};
-    const rng =
-      options.rng ||
-      ((size: any) => crypto.getRandomValues(new Uint8Array(size)));
+    const rng = options.rng || ((size: any) => randombytes(size));
 
     let d;
     do {
