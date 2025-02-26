@@ -6,6 +6,7 @@ import { testEcc } from './testecc.js';
 export { networks };
 import * as v from 'valibot';
 import * as tools from 'uint8array-tools';
+import { crypto } from './crypto.js';
 
 const ECPairOptionsSchema = v.optional(
   v.object({
@@ -95,26 +96,15 @@ interface XOnlyPointAddTweakResult {
   xOnlyPubkey: Uint8Array;
 }
 
-function randombytes(size: number): Uint8Array {
-  if (size === undefined || typeof size !== 'number') {
-    throw new Error('Invalid size argument');
+export function randomBytes(bytesLength = 32): Uint8Array {
+  if (crypto && typeof crypto.getRandomValues === 'function') {
+    return crypto.getRandomValues(new Uint8Array(bytesLength));
   }
-
-  // Browser environment
-  if (typeof window !== 'undefined' && window.crypto?.getRandomValues) {
-    const array = new Uint8Array(size);
-    window.crypto.getRandomValues(array);
-    return array;
+  // Legacy Node.js compatibility
+  if (crypto && typeof crypto.randomBytes === 'function') {
+    return crypto.randomBytes(bytesLength);
   }
-
-  // Node.js environment
-  if (typeof require === 'function') {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const crypto = require('crypto');
-    return crypto.randomBytes(size);
-  }
-
-  throw new Error('No secure random number generator available');
+  throw new Error('crypto.getRandomValues must be defined');
 }
 
 export function ECPairFactory(ecc: TinySecp256k1Interface): ECPairAPI {
@@ -191,7 +181,7 @@ export function ECPairFactory(ecc: TinySecp256k1Interface): ECPairAPI {
   function makeRandom(options?: ECPairOptions): ECPairInterface {
     v.parse(ECPairOptionsSchema, options);
     if (options === undefined) options = {};
-    const rng = options.rng || ((size: any) => randombytes(size));
+    const rng = options.rng || ((size: any) => randomBytes(size));
 
     let d;
     do {
