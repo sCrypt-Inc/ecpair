@@ -103,16 +103,16 @@ describe('ECPair', () => {
     // });
   });
 
-  describe('fromPublicKey', () => {
-    // fixtures.invalid.fromPublicKey.forEach((f) => {
-    //   it('throws ' + f.exception, () => {
-    //     const Q = Buffer.from(f.Q, 'hex');
-    //     assert.throws(() => {
-    //       ECPair.fromPublicKey(Q, (f as any).options);
-    //     }, new RegExp(f.exception));
-    //   });
-    // });
-  });
+  // describe('fromPublicKey', () => {
+  //   fixtures.invalid.fromPublicKey.forEach((f) => {
+  //     it('throws ' + f.exception, () => {
+  //       const Q = Buffer.from(f.Q, 'hex');
+  //       assert.throws(() => {
+  //         ECPair.fromPublicKey(Q, (f as any).options);
+  //       }, new RegExp(f.exception));
+  //     });
+  //   });
+  // });
 
   describe('fromWIF', () => {
     fixtures.valid.forEach(f => {
@@ -183,7 +183,7 @@ describe('ECPair', () => {
     describe('uses crypto.getRandomBytes as RNG', () => {
       it('generates a ECPair', () => {
         const originalFn = crypto.getRandomValues;
-        // @ts-ignore
+        // @ts-expect-error ignore ts error
         crypto.getRandomValues = (): Buffer => {
           return d;
         };
@@ -332,7 +332,6 @@ describe('ECPair', () => {
         return tinysecp.verifySchnorr(h, Q, sig);
       };
 
-      // @ts-ignore
       keyPair = ECPairFactory({
         ...tinysecp,
         sign: mockSign,
