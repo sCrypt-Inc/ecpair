@@ -10,4 +10,4 @@ export declare const NetworkSchema: v.ObjectSchema<{
     readonly scriptHash: v.SchemaWithPipe<[v.NumberSchema<undefined>, v.IntegerAction<number, undefined>, v.MinValueAction<number, 0, undefined>, v.MaxValueAction<number, 255, undefined>]>;
     readonly wif: v.SchemaWithPipe<[v.NumberSchema<undefined>, v.IntegerAction<number, undefined>, v.MinValueAction<number, 0, undefined>, v.MaxValueAction<number, 255, undefined>]>;
 }, undefined>;
-export declare const Buffer256Bit: v.SchemaWithPipe<[v.InstanceSchema<Uint8ArrayConstructor, undefined>, v.LengthAction<Uint8Array, 32, undefined>]>;
+export declare const Buffer256Bit: v.SchemaWithPipe<[v.InstanceSchema<Uint8ArrayConstructor, undefined>, v.LengthAction<Uint8Array<ArrayBuffer>, 32, undefined>]>;

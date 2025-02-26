@@ -1,5 +1,5 @@
-import { Network } from './networks';
-import * as networks from './networks';
+import { Network } from './networks.js';
+import * as networks from './networks.js';
 export { networks };
 import * as v from 'valibot';
 declare const ECPairOptionsSchema: v.OptionalSchema<v.ObjectSchema<{
@@ -15,7 +15,7 @@ declare const ECPairOptionsSchema: v.OptionalSchema<v.ObjectSchema<{
         readonly scriptHash: v.SchemaWithPipe<[v.NumberSchema<undefined>, v.IntegerAction<number, undefined>, v.MinValueAction<number, 0, undefined>, v.MaxValueAction<number, 255, undefined>]>;
         readonly wif: v.SchemaWithPipe<[v.NumberSchema<undefined>, v.IntegerAction<number, undefined>, v.MinValueAction<number, 0, undefined>, v.MaxValueAction<number, 255, undefined>]>;
     }, undefined>, never>;
-    readonly rng: v.OptionalSchema<v.SchemaWithPipe<[v.InstanceSchema<FunctionConstructor, undefined>, v.TransformAction<Function, (arg?: number) => Uint8Array>]>, never>;
+    readonly rng: v.OptionalSchema<v.SchemaWithPipe<[v.InstanceSchema<FunctionConstructor, undefined>, v.TransformAction<Function, (arg?: number) => Uint8Array<ArrayBuffer>>]>, never>;
 }, undefined>, never>;
 type ECPairOptions = v.InferOutput<typeof ECPairOptionsSchema>;
 export interface Signer {
