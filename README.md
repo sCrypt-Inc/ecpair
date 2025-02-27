@@ -1,5 +1,5 @@
 # ecpair
-[![Github CI](https://github.com/bitcoinjs/ecpair/actions/workflows/main_ci.yml/badge.svg)](https://github.com/bitcoinjs/ecpair/actions/workflows/main_ci.yml) [![NPM](https://img.shields.io/npm/v/ecpair.svg)](https://www.npmjs.org/package/ecpair) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Github CI](https://github.com/sCrypt-Inc/ecpair/actions/workflows/main_ci.yml/badge.svg)](https://github.com/sCrypt-Inc/ecpair/actions/workflows/main_ci.yml) [![NPM](https://img.shields.io/npm/v/ecpair.svg)](https://www.npmjs.org/package/ecpair) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 A library for managing SECP256k1 keypairs written in TypeScript with transpiled JavaScript committed to git.
 
@@ -13,7 +13,7 @@ A library for managing SECP256k1 keypairs written in TypeScript with transpiled 
 TypeScript
 
 ``` typescript
-import { Signer, SignerAsync, ECPairInterface, ECPairFactory, ECPairAPI, TinySecp256k1Interface } from 'ecpair';
+import { Signer, SignerAsync, ECPairInterface, ECPairFactory, ECPairAPI, TinySecp256k1Interface } from '@scrypt-inc/ecpair';
 import * as crypto from 'crypto';
 
 // You need to provide the ECC library. The ECC library must implement 
@@ -50,4 +50,4 @@ ECPair.fromWIF('wif key...', [network, network2, network3]);
 ```
 
 ## LICENSE [MIT](LICENSE)
-Written and tested by [bitcoinjs-lib](https://github.com/bitcoinjs/bitcoinjs-lib) contributors since 2014.
+Written and tested by [bitcoinjs-lib](https://github.com/sCrypt-Inc/bitcoinjs-lib) contributors since 2014.

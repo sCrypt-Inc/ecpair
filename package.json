@@ -1,6 +1,6 @@
 {
   "name": "@scrypt-inc/ecpair",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Client-side Bitcoin JavaScript library ECPair",
   "type": "module",
   "main": "dist/cjs/index.cjs",
@@ -48,7 +48,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitcoinjs/ecpair.git"
+    "url": "https://github.com/sCrypt-Inc/ecpair.git"
   },
   "files": [
     "src"
